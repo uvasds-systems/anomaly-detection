@@ -41,7 +41,6 @@ endpoints:
 - GET `/health` — simple liveness check, useful for confirming the service came up correctly after bootstrap
 
 To run this bundled application, you must:
-- 
 - Create and activate a virtual environment using `virtualenv` or `pipenv`, etc.
 - Install Python dependencies into that environment, found in `requirements.txt`.
 - Run the FastAPI application using this syntax from within the directory where `app.py` exists:
