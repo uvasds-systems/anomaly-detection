@@ -14,6 +14,16 @@ a useful conceptual bridge toward real streaming systems.
 
 - - -
 
+## Setup
+
+First, fork this repository to own and manage your own copy.
+
+Second, you must update the value of the `BUCKET_NAME` that will be created with
+your resource stack, or you must bootstrap the instance so that `BUCKET_NAME` is 
+available as a global environment variable. This can be done by adding the KEY=VALUE
+into `/etc/environment`. The application will not run without an S3 bucket and an
+IAM role allowing it read/write access to the bucket.
+
 The following files support the detection and get imported as classes or called by
 the main API:
 ```
@@ -31,6 +41,7 @@ endpoints:
 - GET `/health` — simple liveness check, useful for confirming the service came up correctly after bootstrap
 
 To run this bundled application, you must:
+- 
 - Create and activate a virtual environment using `virtualenv` or `pipenv`, etc.
 - Install Python dependencies into that environment, found in `requirements.txt`.
 - Run the FastAPI application using this syntax from within the directory where `app.py` exists:
@@ -39,3 +50,13 @@ To run this bundled application, you must:
     fastapi run app.py --reload
     ```
   Remember that the `python` or `fastapi` binaries for a virtual environment have their own paths that can be called from outside of the activated virtual environment.
+
+The running application, as it receives and digests test files, records cumulative 
+state in a file named `baseline.json` which it also regularly pushes back to your 
+bucket in `s3://BUCKET_NAME/state/baseline.json`.
+
+## Testing
+
+A test script `test_producer.py` is provided that should be run on your local laptop or from within another
+SSH session on your instance. Note that it has its own dependencies.
+
