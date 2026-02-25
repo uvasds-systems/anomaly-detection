@@ -63,11 +63,3 @@ bucket in `s3://BUCKET_NAME/state/baseline.json`.
 A test script `test_producer.py` is provided that should be run on your local laptop or from within another SSH session on your instance. Note that it has its own dependencies.
 
 Testing produces a CSV file containing 100 records every 60 seconds, which are then pushed to your S3 bucket in a `raw/` folder. A sample file can be found [**here**](sensors_20260224T001051.csv).
-
-## Logging
-
-Logging to a local file should be implemented, and a copy of that log file should be synced to your S3 bucket with each push of the `baseline.json` file.
-
-Log any significant actions, such as the arrival of a new file, a new set of calculations, a new update of the baseline, etc.
-
-This will result in a single application logfile copied off of the EC2 instance.
